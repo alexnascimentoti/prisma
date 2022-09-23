@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json())
 app.use(routes)
 
-//middleware para tratar o lançamento de throw 
+//middleware para tratar o lançamento de exceção throw 
 app.use((err : Error, request: Request, response: Response, next: NextFunction) =>{
   if ( err instanceof Error ){
     return response.status(400).json({

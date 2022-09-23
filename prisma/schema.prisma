@@ -12,7 +12,7 @@ datasource db {
 
 model Deliveryman {
   id         Int          @id @default(autoincrement())
-  username   String       @unique @map("user_name")
+  username   String       @unique
   password   String
   Deliveries Deliveries[]
 
@@ -21,7 +21,7 @@ model Deliveryman {
 
 model Clients {
   id         Int          @id @default(autoincrement())
-  username   String       @unique @map("user_name")
+  username   String       @unique
   password   String
   Deliveries Deliveries[]
 
@@ -29,14 +29,14 @@ model Clients {
 }
 
 model Deliveries {
-  id            Int         @id @default(autoincrement())
-  client        Clients     @relation(fields: [idClient], references: [id])
-  idClient      Int         @map("id_client")
-  deliverman    Deliveryman @relation(fields: [idDeliveryman], references: [id])
-  idDeliveryman Int         @map("id_deliveryman")
-  itemName      String      @map("item_name")
-  createdAt     DateTime    @default(now()) @map("created_at")
-  endAt         DateTime    @map("end_at")
+  id             Int          @id @default(autoincrement())
+  client         Clients      @relation(fields: [id_client], references: [id])
+  id_client       Int          
+  deliverman     Deliveryman? @relation(fields: [id_deliveryman], references: [id])
+  id_deliveryman Int?
+  item_name      String
+  created_at     DateTime     @default(now())
+  end_at         DateTime?
 
   @@map("deliveries")
 }
